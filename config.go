@@ -4,10 +4,10 @@ import (
 	"encoding/json"
 	"io/ioutil"
 
-	"github.com/richardheath/zeal-server/data"
-	"github.com/richardheath/zeal-server/storage"
+	"github.com/richardheath/zeal-registry/data"
+	"github.com/richardheath/zeal-registry/storage"
 
-	"github.com/richardheath/zeal-server/auth"
+	"github.com/richardheath/zeal-registry/auth"
 )
 
 type zealInstance struct {
