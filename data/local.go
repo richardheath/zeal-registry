@@ -19,7 +19,7 @@ type LocalProviderConfig struct {
 	dataFolder string
 }
 
-func (handler LocalProvider) initialize(config map[string]interface{}) error {
+func (handler *LocalProvider) Initialize(config map[string]interface{}) error {
 	localDB, err := db.OpenDB(config["path"].(string))
 	if err != nil {
 		return err
@@ -29,26 +29,26 @@ func (handler LocalProvider) initialize(config map[string]interface{}) error {
 	return nil
 }
 
-func (handler LocalProvider) SearchPackages(keywords []string) ([]string, error) {
+func (handler *LocalProvider) SearchByKeywords(keywords []string) ([]string, error) {
 	return nil, nil
 }
 
-func (handler LocalProvider) PackageExist(packageName string, version string) (bool, error) {
+func (handler *LocalProvider) SearchByPackageVersions(name, platform, filter string) ([]string, error) {
+	return nil, nil
+}
+
+func (handler *LocalProvider) PackageExist(name, version string) (bool, error) {
 	return false, nil
 }
 
-func (handler LocalProvider) GetPackageVersions(packageName string) ([]PackageVersions, error) {
-	return nil, nil
-}
-
-func (handler LocalProvider) GetPackageMetadata(packageName string, version string) (PackageMetadata, error) {
+func (handler *LocalProvider) GetPackageMetadata(name, version string) (PackageMetadata, error) {
 	return PackageMetadata{}, nil
 }
 
-func (handler LocalProvider) SetPackageConfiguration(packageName string, version string, PackageMetadata map[string]interface{}) error {
+func (handler *LocalProvider) CreatePackage(name, version string, platforms, keywords []string) error {
 	return nil
 }
 
-func (handler LocalProvider) AddPackagePlatform(packageName string, version string, platform string) error {
+func (handler *LocalProvider) AddPackagePlatform(name, version, platform string) error {
 	return nil
 }
