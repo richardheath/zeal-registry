@@ -7,9 +7,11 @@ import (
 
 // Provider Interfact for storage provider.
 type Provider interface {
-	initialize(config map[string]interface{}) error
-	DownloadPackage(repo, packageName, version, platform string) (DownloadInfo, error)
-	PublishPackage(repo, packageName, version, platform string, data *multipart.File) error
+	Initialize(config map[string]interface{}) error
+	DownloadPackage(repo, name, version, platform string) (DownloadInfo, error)
+	PublishPackage(repo, name, version, platform string, data *multipart.File) error
+	DownloadDefinition(repo, name, version, platform string) (DownloadInfo, error)
+	PublishDefinition(repo, name, version, platform string, data *multipart.File) error
 }
 
 // DownloadInfo Meatadata for target file for download.
@@ -22,12 +24,12 @@ type DownloadInfo struct {
 func InitializeProvider(providerType string, config map[string]interface{}) (Provider, error) {
 	var provider Provider
 	if providerType == "local" {
-		provider = LocalProvider{}
+		provider = &LocalProvider{}
 	} else {
 		return nil, fmt.Errorf("Storage provider '%s' not supported", providerType)
 	}
 
-	err := provider.initialize(config)
+	err := provider.Initialize(config)
 	if err != nil {
 		return nil, err
 	}
